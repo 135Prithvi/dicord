@@ -6,8 +6,7 @@ import { useState } from 'react'
 function Navbar() {
   const router = useRouter()
   const [showModal, setShowModal] = useState('')
-  //  items-center justify-center w-full inline-flex mt-4 flex-col md:mt-0 md:flex-row md:space-x-2 md:text-sm md:font-medium
-  // {`${showModal=="visible"? "visible":"hidden"} h-6 w-6`}
+  
   return (
     <div className="sticky top-0 border-b-2 border-t-2 shadow-lg ">
       <nav className="rounded border-gray-200 bg-white px-2 py-2.5 dark:bg-gray-800 sm:px-4">
@@ -70,9 +69,9 @@ function Navbar() {
                 </a>
               </Link>
 
-              <Link href="#">
+              <Link href="/weather">
                 <a className="mx-2 mb-1  block rounded-lg bg-gradient-to-br from-green-400 to-blue-600 px-5 py-2 pr-4 pl-3 text-center text-sm font-medium text-white hover:bg-gradient-to-bl focus:outline-none focus:ring-4  focus:ring-green-200 dark:focus:ring-green-800">
-                  About
+                  Weather
                 </a>
               </Link>
             </ul>

@@ -1,0 +1,46 @@
+import { FormEvent, useContext } from 'react'
+import { DiscordContext } from '../context/context'
+import styles from '../styles/messageForm.module.css'
+import plusFilled from '../assets/icons/plus-filled.svg'
+import sticker from '../assets/icons/sticker.svg'
+import smiley from '../assets/icons/smiley.svg'
+import gift from '../assets/icons/gift.svg'
+import gif from '../assets/icons/gif.svg'
+import Image from 'next/image'
+
+export default function MessageForm() {
+  const {
+    messageText,
+    setMessageText,
+    placeholder,
+    gun,
+    roomName,
+    currentAccount,
+    currentUser,
+  } = useContext(DiscordContext)
+
+  const sendMessage = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (messageText.trim() === '') return
+
+    const messagesRef = gun.get(roomName)
+
+    const newMessage = {
+      sender: currentUser.name,
+      avatar: currentUser.avatar
+        ? currentUser.avatar
+        : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3OCSMFIW5fZ3vSN6yGpD-w-6SsL2_ZPA_sw&usqp=CAU',
+      content: messageText.trim(),
+      createdAt: Date().substring(4, 11),
+      messageId: Date.now(),
+    }
+
+    messagesRef.set(newMessage)
+    setMessageText('')
+  }
+
+  return (
+    <></>
+  )
+}
+

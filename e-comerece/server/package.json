@@ -1,0 +1,17 @@
+{
+  "name": "discord-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "module",
+  "author": "Iris",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.mjs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "gun": "^0.2020.1237",
+    "nodemon": "^2.0.16"
+  }
+}
