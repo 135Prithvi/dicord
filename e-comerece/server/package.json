@@ -6,7 +6,7 @@
   "author": "Iris",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.mjs"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

@@ -9,12 +9,12 @@ export const userSchema = {
                 title:"Name",
         },
         {
-                name:"walletaddress",
+                name:"walletAddress",
                 type:"string",
                 title:"Wallet Address",
         },
         {
-                name:"profileimage",
+                name:"profileImage",
                 type:"image",
                 title:"Profile Image",
         },
