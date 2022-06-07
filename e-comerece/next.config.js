@@ -6,7 +6,7 @@ const nextConfig = {
     fs: 'empty',
   },
   images: {
-    domains: ['encrypted-tbn0.gstatic.com', 'cdn.sanity.io'],
+    domains: ['encrypted-tbn0.gstatic.com', 'cdn.sanity.io' ,"img.icons8.com"],
   },
 }
 

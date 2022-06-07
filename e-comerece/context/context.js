@@ -26,31 +26,44 @@ export const DiscordProvider = ({ children }) => {
   const [placeholder, setPlaceholder] = useState('Message...')
   const [messageText, setMessageText] = useState('')
   const [currentUser, setCurrentUser] = useState([])
-  window.ethereum.on('accountsChanged', function (accounts) {
-    connectWallet()
-  })
+  var today = new Date()
+  var time = today.getHours() + ':' + today.getMinutes()
+
+
+
+  try {
+    window.ethereum.on('accountsChanged', function (accounts) {
+      connectWallet()
+    })
+  } catch (err) {
+    console.log('Oops, `window` is not defined')
+  }
+
   useEffect(() => {
     checkIfWalletIsConnected()
   }, [])
+
+
   const xyz = async () => {
     if (!currentAccount) return
-    
+
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/getCurrentUserData?account=${currentAccount}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/getCurrentUserData?account=${currentAccount}`
       )
 
       const data = await response.json()
-      
+
       setCurrentUser(data)
-      
     } catch (error) {
-      
-      
       console.error(error)
     }
-  };
-  useEffect(()=>{xyz()}, [currentAccount])
+  }
+
+
+  useEffect(() => {
+    xyz()
+  }, [currentAccount])
 
   useEffect(() => {
     setRoomName(router.query.name)
@@ -63,60 +76,59 @@ export const DiscordProvider = ({ children }) => {
   const getMessages = async () => {
     const _name = router.query.name
     const _roomId = router.query.id
-    const messagesRef =  gun.get(_name)
+    const messagesRef = gun.get(_name)
 
-    await messagesRef.map().once(message => {
-     
-      
-      
-       dispatch({
+    messagesRef.map((message) => {
+      dispatch({
         type: 'add',
         data: {
           sender: message?.sender,
           content: message?.content,
           avatar: message?.avatar,
           createdAt: message?.createdAt,
+          time: time,
           messageId: message?.messageId,
         },
       })
     })
   }
 
-  // const createUserAccount = async (userAddress = currentAccount) => {
-  //   if (!window.ethereum) return
+  const createUserAccount = async (userAddress = currentAccount) => {
+    if (!window.ethereum) return
 
-  //   try {
-  //     const data = {
-  //       userAddress: userAddress,
-  //     }
+    try {
+      const data = {
+        userAddress: userAddress,
+        name: currentUser.name,
+      }
 
-  //     try {
-  //       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createUser`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(data),
-  //       })
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
+      try {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createUser`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+      } catch (error) {
+        console.error(error)
+      }
 
-  //     try {
-  //       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createDm`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: JSON.stringify(data),
-  //       })
-  //     } catch (error) {
-  //       console.error(error)
-  //     }
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
+      //     try {
+      //       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/createDm`, {
+      //         method: 'POST',
+      //         headers: {
+      //           'Content-Type': 'application/json',
+      //         },
+      //         body: JSON.stringify(data),
+      //       })
+      //     } catch (error) {
+      //       console.error(error)
+      //     }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const checkIfWalletIsConnected = async () => {
     if (!window.ethereum) return
@@ -125,7 +137,6 @@ export const DiscordProvider = ({ children }) => {
         method: 'eth_requestAccounts',
       })
       if (addressArray.length > 0) {
-        console.log(addressArray);
         setCurrentAccount(addressArray[0])
         createUserAccount(addressArray[0])
       } else {
@@ -143,8 +154,8 @@ export const DiscordProvider = ({ children }) => {
       })
 
       if (addressArray.length > 0) {
-        console.log(addressArray[0]);
-        
+        console.log(addressArray[0])
+
         setCurrentAccount(addressArray[0])
         createUserAccount(addressArray[0])
       }

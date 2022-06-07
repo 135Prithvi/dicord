@@ -6,7 +6,16 @@ const query = `*[_type == "conversations" && isDM==false]{
   "avatar": image.asset->url
 }`
 
-export default async (req: any, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: unknown): void; new(): any } } }) => {
+export default async (
+  req: any,
+  res: {
+    status: (arg0: number) => {
+      (): any
+      new (): any
+      send: { (arg0: unknown): void; new (): any }
+    }
+  }
+) => {
   try {
     const sanityResponse = await client.fetch(query)
 

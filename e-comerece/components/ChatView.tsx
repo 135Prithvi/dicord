@@ -22,17 +22,34 @@ export default function ChatView() {
   }
 
   return (
-    <div className="h-screen  overflow-y-auto w-full bg-[#2f3136] text-white ">
+    <div className="h-screen  w-full overflow-y-auto bg-[#2f3136] text-white ">
       <ChatHeader />
-      <div className="p-5   flex-[6]  pb-[30px]">
-        {formattedMessagesArray().map((message: { avatar: any; sender: any; createdAt: any; content: any }, index: Key | null | undefined) => { return <MessageCard 
-            key={index}
-            avatar={message.avatar}
-            sender={message.sender}
-            timestamp={message.createdAt}
-            content={message.content} /> })}
+      <div className="flex-[6]   p-5  pb-[30px]">
+        {formattedMessagesArray().map(
+          (
+            message: {
+              avatar: any
+              sender: any
+              createdAt: any
+              content: any
+              time: any
+            },
+            index: Key | null | undefined
+          ) => {
+            return (
+              <MessageCard
+                key={index}
+                avatar={message.avatar}
+                sender={message.sender}
+                timestamp={message.createdAt}
+                content={message.content}
+                time={message.time}
+              />
+            )
+          }
+        )}
       </div>
-      <MessageForm/>
+      <MessageForm />
     </div>
   )
 }

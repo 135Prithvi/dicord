@@ -1,18 +1,18 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
-export default function NavBar(){
+export default function NavBar() {
   const router = useRouter()
   const [showModal, setShowModal] = useState('')
-  
+
   return (
     <div className="sticky top-0 border-b-2 border-t-2 shadow-lg ">
       <nav className="rounded border-gray-200 bg-white px-2 py-2.5 dark:bg-gray-800 sm:px-4">
         <div className="container mx-auto flex flex-wrap items-center justify-between md:flex-row">
           <div className="flex items-center">
             <span className="self-center whitespace-nowrap text-xl font-semibold   dark:text-white">
-             Esklic
+              Esklic
             </span>
           </div>
           <button

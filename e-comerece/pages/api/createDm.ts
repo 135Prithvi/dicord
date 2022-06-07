@@ -1,6 +1,15 @@
 import { client } from '../../lib/client'
 
-export default async (req: { body: { userAddress: any } }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: unknown): void; new(): any } } }) => {
+export default async (
+  req: { body: { userAddress: any } },
+  res: {
+    status: (arg0: number) => {
+      (): any
+      new (): any
+      send: { (arg0: unknown): void; new (): any }
+    }
+  }
+) => {
   const { userAddress } = req.body
 
   const conversationDoc = {

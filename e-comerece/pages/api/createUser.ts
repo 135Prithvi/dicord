@@ -1,12 +1,21 @@
 import { client } from '../../lib/client'
 
-export default async (req: { body: { userAddress: any } }, res: { status: (arg0: number) => { (): any; new(): any; send: { (arg0: unknown): void; new(): any } } }) => {
-  const { userAddress } = req.body
+export default async (
+  req: { body: { userAddress: any; name: any } },
+  res: {
+    status: (arg0: number) => {
+      (): any
+      new (): any
+      send: { (arg0: unknown): void; new (): any }
+    }
+  }
+) => {
+  const { userAddress, name } = req.body
 
   const userDoc = {
     _type: 'users',
     _id: `${userAddress}-user`,
-    name: 'Unnamed',
+    name: name,
     walletAddress: userAddress,
   }
 

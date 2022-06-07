@@ -17,9 +17,11 @@ export default function RoomAvatar({ id, avatar, name }: any) {
           width={48}
           height={48}
           alt={name}
-          className="rounded-3xl duration-300 ease-linear cursor-pointer hover:rounded-xl transition-all"
+          className="cursor-pointer rounded-3xl transition-all duration-300 ease-linear hover:rounded-xl"
         />
-        <span className="group-hover:scale-100 absolute w-auto rounded-md transition-all duration-100 p-2 m-2 min-w-max shadow-md text-white bg-gray-900 font-bold text-xs scale-0 origin-left left-14">{name}</span>
+        <span className="absolute left-14 m-2 w-auto min-w-max origin-left scale-0 rounded-md bg-gray-900 p-2 text-xs font-bold text-white shadow-md transition-all duration-100 group-hover:scale-100">
+          {name}
+        </span>
       </div>
     </>
   )
